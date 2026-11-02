@@ -1,0 +1,569 @@
+{
+  "case": "normal",
+  "title": "正常完成：预算 10，初始方案估算 12 超限，改用 8 的方案",
+  "brief": {
+    "topic": "春季新品",
+    "budget_units": 10,
+    "deadline_days": 7,
+    "audience": "校园人群",
+    "proposed_plan": "plan-standard"
+  },
+  "policy": "mock",
+  "charge_tools_to_budget": false,
+  "status": "completed",
+  "incomplete_reason": null,
+  "plan": {
+    "version": 2,
+    "revision_reason": "plan-standard 超出约束（图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 10），改用更省的 plan-lean",
+    "tasks": [
+      {
+        "id": "t1_research",
+        "name": "检索主题素材",
+        "tool": "search_materials",
+        "depends_on": [],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.5,
+        "detail": "检索到 1 条素材"
+      },
+      {
+        "id": "t2_estimate",
+        "name": "估算首选方案成本",
+        "tool": "estimate_cost",
+        "depends_on": [
+          "t1_research"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.2,
+        "detail": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天"
+      },
+      {
+        "id": "t3_draft",
+        "name": "按 plan-lean 生成脚本",
+        "tool": "draft_script",
+        "depends_on": [
+          "t2b_estimate"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 2.0,
+        "detail": "生成 3 篇脚本"
+      },
+      {
+        "id": "t4_save",
+        "name": "保存 plan-lean 方案",
+        "tool": "save_plan",
+        "depends_on": [
+          "t3_draft"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.3,
+        "detail": "已保存方案到 examples\\runs\\normal\\plan.json"
+      },
+      {
+        "id": "t2b_estimate",
+        "name": "估算替代方案 plan-lean",
+        "tool": "estimate_cost",
+        "depends_on": [
+          "t1_research"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.2,
+        "detail": "轻量图文 + UGC 征集 预计 8 单位 / 5 天"
+      }
+    ]
+  },
+  "costs": {
+    "tool_spend": 3.2,
+    "plan_cost": 8.0,
+    "total": 8.0,
+    "all_in": 11.2,
+    "budget": 10,
+    "remaining": 2.0,
+    "by_tool": {
+      "search_materials": 0.5,
+      "estimate_cost": 0.4,
+      "draft_script": 2.0,
+      "save_plan": 0.3
+    }
+  },
+  "drafts": 3,
+  "notes": [
+    "计划 v1：建立基础任务链：检索 → 估算 → 生成 → 保存",
+    "成本 12 超出预算 10（plan-standard）",
+    "计划 v2：plan-standard 超出约束（图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 10），改用更省的 plan-lean"
+  ],
+  "rejected_plans": [
+    "plan-standard"
+  ],
+  "saved_plan_path": "examples\\runs\\normal\\plan.json",
+  "saved_plan_id": "plan-lean",
+  "turns": 8,
+  "tool_calls": 5,
+  "invalid_actions": 0,
+  "trace": [
+    {
+      "turn": 1,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1_research",
+              "name": "检索主题素材",
+              "tool": "search_materials",
+              "depends_on": []
+            },
+            {
+              "id": "t2_estimate",
+              "name": "估算首选方案成本",
+              "tool": "estimate_cost",
+              "depends_on": [
+                "t1_research"
+              ]
+            },
+            {
+              "id": "t3_draft",
+              "name": "生成内容脚本",
+              "tool": "draft_script",
+              "depends_on": [
+                "t2_estimate"
+              ]
+            },
+            {
+              "id": "t4_save",
+              "name": "保存最终方案",
+              "tool": "save_plan",
+              "depends_on": [
+                "t3_draft"
+              ]
+            }
+          ],
+          "reason": "建立基础任务链：检索 → 估算 → 生成 → 保存"
+        },
+        "rationale": "还没有任务计划，先建立任务链"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v1 已就绪，共 4 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 1,
+          "tasks": [
+            "t1_research",
+            "t2_estimate",
+            "t3_draft",
+            "t4_save"
+          ],
+          "kept_done": []
+        }
+      },
+      "state_after": {
+        "turns": 1,
+        "tool_calls": 0,
+        "tool_spend": 0.0,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1_research": "pending",
+          "t2_estimate": "pending",
+          "t3_draft": "pending",
+          "t4_save": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 2,
+      "decision": {
+        "action": "search_materials",
+        "args": {
+          "task_id": "t1_research",
+          "query": "春季新品"
+        },
+        "rationale": "先看有哪些可复用素材"
+      },
+      "observation": {
+        "action": "search_materials",
+        "ok": true,
+        "summary": "检索到 1 条素材",
+        "cost_units": 0.5,
+        "payload": {
+          "query": "春季新品",
+          "materials": [
+            {
+              "id": "mat-001",
+              "title": "2026 春季新品发布节奏观察",
+              "summary": "头部品牌普遍采用「预热两周 + 集中发布 + 长尾种草」三段式，预热期互动率最高。",
+              "reliability": "high"
+            }
+          ],
+          "sim_latency_s": 0.3
+        }
+      },
+      "state_after": {
+        "turns": 2,
+        "tool_calls": 1,
+        "tool_spend": 0.5,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1_research": "done",
+          "t2_estimate": "pending",
+          "t3_draft": "pending",
+          "t4_save": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 3,
+      "decision": {
+        "action": "estimate_cost",
+        "args": {
+          "task_id": "t2_estimate",
+          "plan_id": "plan-standard"
+        },
+        "rationale": "核算 plan-standard 是否在预算与截止时间内"
+      },
+      "observation": {
+        "action": "estimate_cost",
+        "ok": true,
+        "summary": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 10",
+        "cost_units": 0.2,
+        "payload": {
+          "plan_id": "plan-standard",
+          "plan_name": "图文 + 短视频 + 腰部达人",
+          "base_cost_units": 12,
+          "duration_days": 7,
+          "steps": [
+            "确定主题与人群切分",
+            "检索历史素材与达人报价",
+            "生成 5 篇脚本（含 2 条短视频脚本）",
+            "接洽 2 位腰部达人",
+            "发起 UGC 征集作为承接",
+            "汇总数据并复盘"
+          ],
+          "sim_latency_s": 0.1,
+          "violations": [
+            "成本 12 超出预算 10"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 3,
+        "tool_calls": 2,
+        "tool_spend": 0.7,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1_research": "done",
+          "t2_estimate": "done",
+          "t3_draft": "pending",
+          "t4_save": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 4,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1_research",
+              "name": "检索主题素材",
+              "tool": "search_materials",
+              "depends_on": [],
+              "status": "done",
+              "detail": "检索到 1 条素材"
+            },
+            {
+              "id": "t2_estimate",
+              "name": "估算首选方案成本",
+              "tool": "estimate_cost",
+              "depends_on": [
+                "t1_research"
+              ],
+              "status": "done",
+              "detail": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天"
+            },
+            {
+              "id": "t3_draft",
+              "name": "按 plan-lean 生成脚本",
+              "tool": "draft_script",
+              "depends_on": [
+                "t2b_estimate"
+              ],
+              "status": "pending",
+              "detail": ""
+            },
+            {
+              "id": "t4_save",
+              "name": "保存 plan-lean 方案",
+              "tool": "save_plan",
+              "depends_on": [
+                "t3_draft"
+              ],
+              "status": "pending",
+              "detail": ""
+            },
+            {
+              "id": "t2b_estimate",
+              "name": "估算替代方案 plan-lean",
+              "tool": "estimate_cost",
+              "depends_on": [
+                "t1_research"
+              ],
+              "status": "pending"
+            }
+          ],
+          "reason": "plan-standard 超出约束（图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 10），改用更省的 plan-lean"
+        },
+        "rationale": "观测到预算/截止超限，重规划到更省的方案"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v2 已就绪，共 5 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 2,
+          "tasks": [
+            "t1_research",
+            "t2_estimate",
+            "t3_draft",
+            "t4_save",
+            "t2b_estimate"
+          ],
+          "kept_done": [
+            "t1_research",
+            "t2_estimate"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 4,
+        "tool_calls": 2,
+        "tool_spend": 0.7,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1_research": "done",
+          "t2_estimate": "done",
+          "t3_draft": "pending",
+          "t4_save": "pending",
+          "t2b_estimate": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 5,
+      "decision": {
+        "action": "estimate_cost",
+        "args": {
+          "task_id": "t2b_estimate",
+          "plan_id": "plan-lean"
+        },
+        "rationale": "核算 plan-lean 是否在预算与截止时间内"
+      },
+      "observation": {
+        "action": "estimate_cost",
+        "ok": true,
+        "summary": "轻量图文 + UGC 征集 预计 8 单位 / 5 天",
+        "cost_units": 0.2,
+        "payload": {
+          "plan_id": "plan-lean",
+          "plan_name": "轻量图文 + UGC 征集",
+          "base_cost_units": 8,
+          "duration_days": 5,
+          "steps": [
+            "确定主题与人群切分",
+            "检索历史素材，确认可复用内容",
+            "生成 3 篇图文脚本（预热 1 篇 / 发布 1 篇 / 长尾 1 篇）",
+            "发起 UGC 征集，设置低门槛参与规则",
+            "汇总数据并复盘"
+          ],
+          "sim_latency_s": 0.1
+        }
+      },
+      "state_after": {
+        "turns": 5,
+        "tool_calls": 3,
+        "tool_spend": 0.9,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1_research": "done",
+          "t2_estimate": "done",
+          "t3_draft": "pending",
+          "t4_save": "pending",
+          "t2b_estimate": "done"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 6,
+      "decision": {
+        "action": "draft_script",
+        "args": {
+          "task_id": "t3_draft",
+          "plan_id": "plan-lean",
+          "pieces": 3
+        },
+        "rationale": "方案在约束内，生成脚本"
+      },
+      "observation": {
+        "action": "draft_script",
+        "ok": true,
+        "summary": "生成 3 篇脚本",
+        "cost_units": 2.0,
+        "payload": {
+          "plan_id": "plan-lean",
+          "drafts": [
+            {
+              "index": 1,
+              "title": "轻量图文 + UGC 征集 · 脚本 1",
+              "channel": "图文",
+              "hook": "用一句话讲清「轻量图文 + UGC 征集」的第 1 个卖点"
+            },
+            {
+              "index": 2,
+              "title": "轻量图文 + UGC 征集 · 脚本 2",
+              "channel": "图文",
+              "hook": "用一句话讲清「轻量图文 + UGC 征集」的第 2 个卖点"
+            },
+            {
+              "index": 3,
+              "title": "轻量图文 + UGC 征集 · 脚本 3",
+              "channel": "短视频",
+              "hook": "用一句话讲清「轻量图文 + UGC 征集」的第 3 个卖点"
+            }
+          ],
+          "sim_latency_s": 1.2
+        }
+      },
+      "state_after": {
+        "turns": 6,
+        "tool_calls": 4,
+        "tool_spend": 2.9,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1_research": "done",
+          "t2_estimate": "done",
+          "t3_draft": "done",
+          "t4_save": "pending",
+          "t2b_estimate": "done"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 7,
+      "decision": {
+        "action": "save_plan",
+        "args": {
+          "task_id": "t4_save",
+          "plan_id": "plan-lean"
+        },
+        "rationale": "方案确定，保存并核对费用合计"
+      },
+      "observation": {
+        "action": "save_plan",
+        "ok": true,
+        "summary": "已保存方案到 examples\\runs\\normal\\plan.json",
+        "cost_units": 0.3,
+        "payload": {
+          "path": "examples\\runs\\normal\\plan.json",
+          "plan_id": "plan-lean",
+          "plan_cost_units": 8.0,
+          "gaps": [],
+          "sim_latency_s": 0.2
+        }
+      },
+      "state_after": {
+        "turns": 7,
+        "tool_calls": 5,
+        "tool_spend": 3.2,
+        "plan_cost": 8.0,
+        "total_cost": 8.0,
+        "budget": 10,
+        "remaining": 2.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1_research": "done",
+          "t2_estimate": "done",
+          "t3_draft": "done",
+          "t4_save": "done",
+          "t2b_estimate": "done"
+        },
+        "saved_path": "examples\\runs\\normal\\plan.json"
+      }
+    },
+    {
+      "turn": 8,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "completed",
+          "reason": "所有任务完成且方案已保存"
+        },
+        "rationale": "任务链已走完"
+      },
+      "observation": {
+        "action": "finish",
+        "ok": true,
+        "summary": "任务结束",
+        "cost_units": 0.0,
+        "payload": {
+          "status": "completed",
+          "reason": null
+        }
+      },
+      "state_after": {
+        "turns": 8,
+        "tool_calls": 5,
+        "tool_spend": 3.2,
+        "plan_cost": 8.0,
+        "total_cost": 8.0,
+        "budget": 10,
+        "remaining": 2.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1_research": "done",
+          "t2_estimate": "done",
+          "t3_draft": "done",
+          "t4_save": "done",
+          "t2b_estimate": "done"
+        },
+        "saved_path": "examples\\runs\\normal\\plan.json"
+      }
+    }
+  ]
+}

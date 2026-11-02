@@ -1,0 +1,614 @@
+{
+  "case": "missing-budget",
+  "title": "缺预算与截止时间：约束缺失时仍给出方案并说明假设",
+  "brief": {
+    "topic": "春季新品",
+    "budget_units": null,
+    "deadline_days": null,
+    "audience": "校园人群",
+    "proposed_plan": "plan-standard"
+  },
+  "policy": "model",
+  "charge_tools_to_budget": false,
+  "status": "completed",
+  "incomplete_reason": null,
+  "plan": {
+    "version": 2,
+    "revision_reason": "修正 v2 计划非法依赖：本次显式列出已完成任务 t1、t2 以保留其 id，使 t5/t6 的 depends_on 指向有效任务。brief 未给预算与截止时间，按规则6采用假设：预算≥12 单位、周期≥7 天，故沿用运营提议的 plan-standard（实测 12 单位 / 7 天）。t1 检索为空，按规则4用新 id t5 缩小关键词重试一次，随后 t6 起草脚本、t7 保存。",
+    "tasks": [
+      {
+        "id": "t1",
+        "name": "检索春季新品校园向素材",
+        "tool": "search_materials",
+        "depends_on": [],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.5,
+        "detail": "未检索到匹配素材"
+      },
+      {
+        "id": "t2",
+        "name": "估算初始方案 plan-standard 成本",
+        "tool": "estimate_cost",
+        "depends_on": [],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.2,
+        "detail": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天"
+      },
+      {
+        "id": "t5",
+        "name": "缩小范围重试检索校园素材",
+        "tool": "search_materials",
+        "depends_on": [
+          "t1"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.5,
+        "detail": "未检索到匹配素材"
+      },
+      {
+        "id": "t6",
+        "name": "按 plan-standard 起草 3 条内容脚本",
+        "tool": "draft_script",
+        "depends_on": [
+          "t5",
+          "t2"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 2.0,
+        "detail": "生成 3 篇脚本"
+      },
+      {
+        "id": "t7",
+        "name": "保存最终方案",
+        "tool": "save_plan",
+        "depends_on": [
+          "t6"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.3,
+        "detail": "已保存方案到 examples\\runs\\missing-budget-model\\plan.json"
+      }
+    ]
+  },
+  "costs": {
+    "tool_spend": 3.5,
+    "plan_cost": 12.0,
+    "total": 12.0,
+    "all_in": 15.5,
+    "budget": null,
+    "remaining": null,
+    "by_tool": {
+      "estimate_cost": 0.2,
+      "search_materials": 1.0,
+      "draft_script": 2.0,
+      "save_plan": 0.3
+    }
+  },
+  "drafts": 3,
+  "notes": [
+    "计划 v1：先建立计划：brief 未给预算与截止时间，按规则6先按初始方案 plan-standard 做真实成本估算，再决定是否切换更便宜方案；素材检索与成本估算可并行。",
+    "计划 v2：修正 v2 计划非法依赖：本次显式列出已完成任务 t1、t2 以保留其 id，使 t5/t6 的 depends_on 指向有效任务。brief 未给预算与截止时间，按规则6采用假设：预算≥12 单位、周期≥7 天，故沿用运营提议的 plan-standard（实测 12 单位 / 7 天）。t1 检索为空，按规则4用新 id t5 缩小关键词重试一次，随后 t6 起草脚本、t7 保存。"
+  ],
+  "rejected_plans": [],
+  "saved_plan_path": "examples\\runs\\missing-budget-model\\plan.json",
+  "saved_plan_id": "plan-standard",
+  "turns": 9,
+  "tool_calls": 5,
+  "invalid_actions": 1,
+  "trace": [
+    {
+      "turn": 1,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1",
+              "name": "检索春季新品校园向素材",
+              "tool": "search_materials",
+              "depends_on": []
+            },
+            {
+              "id": "t2",
+              "name": "估算初始方案 plan-standard 成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t3",
+              "name": "按选定方案起草内容脚本",
+              "tool": "draft_script",
+              "depends_on": [
+                "t1",
+                "t2"
+              ]
+            },
+            {
+              "id": "t4",
+              "name": "保存最终方案",
+              "tool": "save_plan",
+              "depends_on": [
+                "t3"
+              ]
+            }
+          ],
+          "reason": "先建立计划：brief 未给预算与截止时间，按规则6先按初始方案 plan-standard 做真实成本估算，再决定是否切换更便宜方案；素材检索与成本估算可并行。"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"plan_tasks\",\"args\":{\"tasks\":[{\"id\":\"t1\",\"name\":\"检索春季新品校园向素材\",\"tool\":\"search_materials\",\"depends_on\":[]},{\"id\":\"t2\",\"name\":\"估算初始方案 plan-standard 成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t3\",\"name\":\"按选定方案起草内容脚本\",\"tool\":\"draft_script\",\"depends_on\":[\"t1\",\"t2\"]},{\"id\":\"t4\",\"name\":\"保存最终方案\",\"tool\":\"save_plan\",\"depends_on\":[\"t3\"]}],\"reason\":\"先建立计划：brief 未给预算与截止时间，按规则6先按初始方案 plan-standard 做真实成本估算，再决定是否切换更便宜方案；素材检索与成本估算可并行。\"}}"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v1 已就绪，共 4 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 1,
+          "tasks": [
+            "t1",
+            "t2",
+            "t3",
+            "t4"
+          ],
+          "kept_done": []
+        }
+      },
+      "state_after": {
+        "turns": 1,
+        "tool_calls": 0,
+        "tool_spend": 0.0,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": null,
+        "remaining": null,
+        "plan_version": 1,
+        "task_status": {
+          "t1": "pending",
+          "t2": "pending",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 2,
+      "decision": {
+        "action": "estimate_cost",
+        "args": {
+          "task_id": "t2",
+          "plan_id": "plan-standard"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"estimate_cost\",\"args\":{\"task_id\":\"t2\",\"plan_id\":\"plan-standard\"}}"
+      },
+      "observation": {
+        "action": "estimate_cost",
+        "ok": true,
+        "summary": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天",
+        "cost_units": 0.2,
+        "payload": {
+          "plan_id": "plan-standard",
+          "plan_name": "图文 + 短视频 + 腰部达人",
+          "base_cost_units": 12,
+          "duration_days": 7,
+          "steps": [
+            "确定主题与人群切分",
+            "检索历史素材与达人报价",
+            "生成 5 篇脚本（含 2 条短视频脚本）",
+            "接洽 2 位腰部达人",
+            "发起 UGC 征集作为承接",
+            "汇总数据并复盘"
+          ],
+          "sim_latency_s": 0.1
+        }
+      },
+      "state_after": {
+        "turns": 2,
+        "tool_calls": 1,
+        "tool_spend": 0.2,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": null,
+        "remaining": null,
+        "plan_version": 1,
+        "task_status": {
+          "t1": "pending",
+          "t2": "done",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 3,
+      "decision": {
+        "action": "search_materials",
+        "args": {
+          "task_id": "t1",
+          "query": "春季新品 校园 大学生 种草 短视频 素材"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"search_materials\",\"args\":{\"task_id\":\"t1\",\"query\":\"春季新品 校园 大学生 种草 短视频 素材\"}}"
+      },
+      "observation": {
+        "action": "search_materials",
+        "ok": true,
+        "summary": "未检索到匹配素材",
+        "cost_units": 0.5,
+        "payload": {
+          "query": "春季新品 校园 大学生 种草 短视频 素材",
+          "materials": [],
+          "sim_latency_s": 0.3
+        }
+      },
+      "state_after": {
+        "turns": 3,
+        "tool_calls": 2,
+        "tool_spend": 0.7,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": null,
+        "remaining": null,
+        "plan_version": 1,
+        "task_status": {
+          "t1": "done",
+          "t2": "done",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 4,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t5",
+              "name": "缩小范围重试检索校园素材",
+              "tool": "search_materials",
+              "depends_on": [
+                "t1"
+              ]
+            },
+            {
+              "id": "t6",
+              "name": "按 plan-standard 起草 3 条内容脚本",
+              "tool": "draft_script",
+              "depends_on": [
+                "t5",
+                "t2"
+              ]
+            },
+            {
+              "id": "t7",
+              "name": "保存最终方案",
+              "tool": "save_plan",
+              "depends_on": [
+                "t6"
+              ]
+            }
+          ],
+          "reason": "brief 未提供预算与截止时间，按规则6采用假设：预算不少于 12 单位、周期不少于 7 天，故维持运营提议的 plan-standard（已实测 12 单位 / 7 天，未发现超限约束）。t1 检索结果为空（失败需调整），按规则4以新 id t5 缩小关键词重试一次；t3/t4 以新 id t6/t7 重建，已完成步骤 t1、t2 保留。"
+        },
+        "rationale": "检索无结果需缩小范围重试，同时推进脚本与保存步骤",
+        "raw_reply": "{\"action\":\"plan_tasks\",\"args\":{\"tasks\":[{\"id\":\"t5\",\"name\":\"缩小范围重试检索校园素材\",\"tool\":\"search_materials\",\"depends_on\":[\"t1\"]},{\"id\":\"t6\",\"name\":\"按 plan-standard 起草 3 条内容脚本\",\"tool\":\"draft_script\",\"depends_on\":[\"t5\",\"t2\"]},{\"id\":\"t7\",\"name\":\"保存最终方案\",\"tool\":\"save_plan\",\"depends_on\":[\"t6\"]}],\"reason\":\"brief 未提供预算与截止时间，按规则6采用假设：预算不少于 12 单位、周期不少于 7 天，故维持运营提议的 plan-standard（已实测 12 单位 / 7 天，未发现超限约束）。t1 检索结果为空（失败需调整），按规则4以新 id t5 缩小关键词重试一次；t3/t4 以新 id t6/t7 重建，已完成步骤 t1、t2 保留。\"},\"reason\":\"检索无结果需缩小范围重试，同时推进脚本与保存步骤\"}"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": false,
+        "summary": "任务计划不合法：task t5 depends on unknown task t1；task t6 depends on unknown task t2",
+        "cost_units": 0.0,
+        "payload": {
+          "errors": [
+            "task t5 depends on unknown task t1",
+            "task t6 depends on unknown task t2"
+          ]
+        },
+        "error": "INVALID_PLAN: task t5 depends on unknown task t1; task t6 depends on unknown task t2"
+      },
+      "state_after": {
+        "turns": 4,
+        "tool_calls": 2,
+        "tool_spend": 0.7,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": null,
+        "remaining": null,
+        "plan_version": 1,
+        "task_status": {
+          "t1": "done",
+          "t2": "done",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 5,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1",
+              "name": "检索春季新品校园向素材",
+              "tool": "search_materials",
+              "depends_on": []
+            },
+            {
+              "id": "t2",
+              "name": "估算初始方案 plan-standard 成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t5",
+              "name": "缩小范围重试检索校园素材",
+              "tool": "search_materials",
+              "depends_on": [
+                "t1"
+              ]
+            },
+            {
+              "id": "t6",
+              "name": "按 plan-standard 起草 3 条内容脚本",
+              "tool": "draft_script",
+              "depends_on": [
+                "t5",
+                "t2"
+              ]
+            },
+            {
+              "id": "t7",
+              "name": "保存最终方案",
+              "tool": "save_plan",
+              "depends_on": [
+                "t6"
+              ]
+            }
+          ],
+          "reason": "修正 v2 计划非法依赖：本次显式列出已完成任务 t1、t2 以保留其 id，使 t5/t6 的 depends_on 指向有效任务。brief 未给预算与截止时间，按规则6采用假设：预算≥12 单位、周期≥7 天，故沿用运营提议的 plan-standard（实测 12 单位 / 7 天）。t1 检索为空，按规则4用新 id t5 缩小关键词重试一次，随后 t6 起草脚本、t7 保存。"
+        },
+        "rationale": "上一步修订计划因依赖了未列出的已保留任务而失败，本次显式包含 t1、t2 并重建后续任务。",
+        "raw_reply": "{\"action\":\"plan_tasks\",\"args\":{\"tasks\":[{\"id\":\"t1\",\"name\":\"检索春季新品校园向素材\",\"tool\":\"search_materials\",\"depends_on\":[]},{\"id\":\"t2\",\"name\":\"估算初始方案 plan-standard 成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t5\",\"name\":\"缩小范围重试检索校园素材\",\"tool\":\"search_materials\",\"depends_on\":[\"t1\"]},{\"id\":\"t6\",\"name\":\"按 plan-standard 起草 3 条内容脚本\",\"tool\":\"draft_script\",\"depends_on\":[\"t5\",\"t2\"]},{\"id\":\"t7\",\"name\":\"保存最终方案\",\"tool\":\"save_plan\",\"depends_on\":[\"t6\"]}],\"reason\":\"修正 v2 计划非法依赖：本次显式列出已完成任务 t1、t2 以保留其 id，使 t5/t6 的 depends_on 指向有效任务。brief 未给预算与截止时间，按规则6采用假设：预算≥12 单位、周期≥7 天，故沿用运营提议的 plan-standard（实测 12 单位 / 7 天）。t1 检索为空，按规则4用新 id t5 缩小关键词重试一次，随后 t6 起草脚本、t7 保存。\"},\"reason\":\"上一步修订计划因依赖了未列出的已保留任务而失败，本次显式包含 t1、t2 并重建后续任务。\"}"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v2 已就绪，共 5 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 2,
+          "tasks": [
+            "t1",
+            "t2",
+            "t5",
+            "t6",
+            "t7"
+          ],
+          "kept_done": [
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 5,
+        "tool_calls": 2,
+        "tool_spend": 0.7,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": null,
+        "remaining": null,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "done",
+          "t2": "done",
+          "t5": "pending",
+          "t6": "pending",
+          "t7": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 6,
+      "decision": {
+        "action": "search_materials",
+        "args": {
+          "task_id": "t5",
+          "query": "春季新品 校园"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"search_materials\",\"args\":{\"task_id\":\"t5\",\"query\":\"春季新品 校园\"}}"
+      },
+      "observation": {
+        "action": "search_materials",
+        "ok": true,
+        "summary": "未检索到匹配素材",
+        "cost_units": 0.5,
+        "payload": {
+          "query": "春季新品 校园",
+          "materials": [],
+          "sim_latency_s": 0.3
+        }
+      },
+      "state_after": {
+        "turns": 6,
+        "tool_calls": 3,
+        "tool_spend": 1.2,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": null,
+        "remaining": null,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "done",
+          "t2": "done",
+          "t5": "done",
+          "t6": "pending",
+          "t7": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 7,
+      "decision": {
+        "action": "draft_script",
+        "args": {
+          "task_id": "t6",
+          "plan_id": "plan-standard",
+          "pieces": 3
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"draft_script\",\"args\":{\"task_id\":\"t6\",\"plan_id\":\"plan-standard\",\"pieces\":3}}"
+      },
+      "observation": {
+        "action": "draft_script",
+        "ok": true,
+        "summary": "生成 3 篇脚本",
+        "cost_units": 2.0,
+        "payload": {
+          "plan_id": "plan-standard",
+          "drafts": [
+            {
+              "index": 1,
+              "title": "图文 + 短视频 + 腰部达人 · 脚本 1",
+              "channel": "图文",
+              "hook": "用一句话讲清「图文 + 短视频 + 腰部达人」的第 1 个卖点"
+            },
+            {
+              "index": 2,
+              "title": "图文 + 短视频 + 腰部达人 · 脚本 2",
+              "channel": "图文",
+              "hook": "用一句话讲清「图文 + 短视频 + 腰部达人」的第 2 个卖点"
+            },
+            {
+              "index": 3,
+              "title": "图文 + 短视频 + 腰部达人 · 脚本 3",
+              "channel": "短视频",
+              "hook": "用一句话讲清「图文 + 短视频 + 腰部达人」的第 3 个卖点"
+            }
+          ],
+          "sim_latency_s": 1.2
+        }
+      },
+      "state_after": {
+        "turns": 7,
+        "tool_calls": 4,
+        "tool_spend": 3.2,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": null,
+        "remaining": null,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "done",
+          "t2": "done",
+          "t5": "done",
+          "t6": "done",
+          "t7": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 8,
+      "decision": {
+        "action": "save_plan",
+        "args": {
+          "task_id": "t7",
+          "plan_id": "plan-standard"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"save_plan\",\"args\":{\"task_id\":\"t7\",\"plan_id\":\"plan-standard\"}}"
+      },
+      "observation": {
+        "action": "save_plan",
+        "ok": true,
+        "summary": "已保存方案到 examples\\runs\\missing-budget-model\\plan.json",
+        "cost_units": 0.3,
+        "payload": {
+          "path": "examples\\runs\\missing-budget-model\\plan.json",
+          "plan_id": "plan-standard",
+          "plan_cost_units": 12.0,
+          "gaps": [
+            "budget_units",
+            "deadline_days"
+          ],
+          "sim_latency_s": 0.2
+        }
+      },
+      "state_after": {
+        "turns": 8,
+        "tool_calls": 5,
+        "tool_spend": 3.5,
+        "plan_cost": 12.0,
+        "total_cost": 12.0,
+        "budget": null,
+        "remaining": null,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "done",
+          "t2": "done",
+          "t5": "done",
+          "t6": "done",
+          "t7": "done"
+        },
+        "saved_path": "examples\\runs\\missing-budget-model\\plan.json"
+      }
+    },
+    {
+      "turn": 9,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "completed",
+          "reason": "方案已保存为 plan-standard（examples\\runs\\missing-budget-model\\plan.json）。brief 未提供预算与截止时间，按规则6采用假设：预算≥12 单位、周期≥7 天；实测 plan-standard 成本 12 单位 / 7 天，在假设范围内。素材检索两次（t1、t5）均返回空结果，已按规则4缩小关键词重试一次并记录该素材缺口，后续内容脚本（t6）基于主题与校园人群定位生成 3 篇。"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"finish\",\"args\":{\"status\":\"completed\",\"reason\":\"方案已保存为 plan-standard（examples\\\\runs\\\\missing-budget-model\\\\plan.json）。brief 未提供预算与截止时间，按规则6采用假设：预算≥12 单位、周期≥7 天；实测 plan-standard 成本 12 单位 / 7 天，在假设范围内。素材检索两次（t1、t5）均返回空结果，已按规则4缩小关键词重试一次并记录该素材缺口，后续内容脚本（t6）基于主题与校园人群定位生成 3 篇。\"}}"
+      },
+      "observation": {
+        "action": "finish",
+        "ok": true,
+        "summary": "任务结束",
+        "cost_units": 0.0,
+        "payload": {
+          "status": "completed",
+          "reason": null
+        }
+      },
+      "state_after": {
+        "turns": 9,
+        "tool_calls": 5,
+        "tool_spend": 3.5,
+        "plan_cost": 12.0,
+        "total_cost": 12.0,
+        "budget": null,
+        "remaining": null,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "done",
+          "t2": "done",
+          "t5": "done",
+          "t6": "done",
+          "t7": "done"
+        },
+        "saved_path": "examples\\runs\\missing-budget-model\\plan.json"
+      }
+    }
+  ]
+}

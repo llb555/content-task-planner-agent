@@ -1,0 +1,304 @@
+{
+  "brief": {
+    "topic": "春季新品",
+    "budget_units": 5,
+    "deadline_days": 7,
+    "audience": "校园人群",
+    "proposed_plan": "plan-standard"
+  },
+  "policy": "mock",
+  "charge_tools_to_budget": false,
+  "status": "incomplete",
+  "incomplete_reason": "没有可行方案：图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 5。已否决 plan-standard；需要追加预算（当前 5）或放宽截止（当前 7 天）",
+  "plan": {
+    "version": 1,
+    "revision_reason": "建立基础任务链：检索 → 估算 → 生成 → 保存",
+    "tasks": [
+      {
+        "id": "t1_research",
+        "name": "检索主题素材",
+        "tool": "search_materials",
+        "depends_on": [],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.5,
+        "detail": "检索到 1 条素材"
+      },
+      {
+        "id": "t2_estimate",
+        "name": "估算首选方案成本",
+        "tool": "estimate_cost",
+        "depends_on": [
+          "t1_research"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.2,
+        "detail": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天"
+      },
+      {
+        "id": "t3_draft",
+        "name": "生成内容脚本",
+        "tool": "draft_script",
+        "depends_on": [
+          "t2_estimate"
+        ],
+        "status": "pending",
+        "attempts": 0,
+        "cost_units": 0.0,
+        "detail": ""
+      },
+      {
+        "id": "t4_save",
+        "name": "保存最终方案",
+        "tool": "save_plan",
+        "depends_on": [
+          "t3_draft"
+        ],
+        "status": "pending",
+        "attempts": 0,
+        "cost_units": 0.0,
+        "detail": ""
+      }
+    ]
+  },
+  "costs": {
+    "tool_spend": 0.7,
+    "plan_cost": null,
+    "total": 0.0,
+    "all_in": 0.7,
+    "budget": 5,
+    "remaining": 5.0,
+    "by_tool": {
+      "search_materials": 0.5,
+      "estimate_cost": 0.2
+    }
+  },
+  "drafts": 0,
+  "notes": [
+    "计划 v1：建立基础任务链：检索 → 估算 → 生成 → 保存",
+    "成本 12 超出预算 5（plan-standard）"
+  ],
+  "rejected_plans": [
+    "plan-standard"
+  ],
+  "saved_plan_path": null,
+  "saved_plan_id": null,
+  "turns": 4,
+  "tool_calls": 2,
+  "invalid_actions": 0,
+  "trace": [
+    {
+      "turn": 1,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1_research",
+              "name": "检索主题素材",
+              "tool": "search_materials",
+              "depends_on": []
+            },
+            {
+              "id": "t2_estimate",
+              "name": "估算首选方案成本",
+              "tool": "estimate_cost",
+              "depends_on": [
+                "t1_research"
+              ]
+            },
+            {
+              "id": "t3_draft",
+              "name": "生成内容脚本",
+              "tool": "draft_script",
+              "depends_on": [
+                "t2_estimate"
+              ]
+            },
+            {
+              "id": "t4_save",
+              "name": "保存最终方案",
+              "tool": "save_plan",
+              "depends_on": [
+                "t3_draft"
+              ]
+            }
+          ],
+          "reason": "建立基础任务链：检索 → 估算 → 生成 → 保存"
+        },
+        "rationale": "还没有任务计划，先建立任务链"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v1 已就绪，共 4 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 1,
+          "tasks": [
+            "t1_research",
+            "t2_estimate",
+            "t3_draft",
+            "t4_save"
+          ],
+          "kept_done": []
+        }
+      },
+      "state_after": {
+        "turns": 1,
+        "tool_calls": 0,
+        "tool_spend": 0.0,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1_research": "pending",
+          "t2_estimate": "pending",
+          "t3_draft": "pending",
+          "t4_save": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 2,
+      "decision": {
+        "action": "search_materials",
+        "args": {
+          "task_id": "t1_research",
+          "query": "春季新品"
+        },
+        "rationale": "先看有哪些可复用素材"
+      },
+      "observation": {
+        "action": "search_materials",
+        "ok": true,
+        "summary": "检索到 1 条素材",
+        "cost_units": 0.5,
+        "payload": {
+          "query": "春季新品",
+          "materials": [
+            {
+              "id": "mat-001",
+              "title": "2026 春季新品发布节奏观察",
+              "summary": "头部品牌普遍采用「预热两周 + 集中发布 + 长尾种草」三段式，预热期互动率最高。",
+              "reliability": "high"
+            }
+          ],
+          "sim_latency_s": 0.3
+        }
+      },
+      "state_after": {
+        "turns": 2,
+        "tool_calls": 1,
+        "tool_spend": 0.5,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1_research": "done",
+          "t2_estimate": "pending",
+          "t3_draft": "pending",
+          "t4_save": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 3,
+      "decision": {
+        "action": "estimate_cost",
+        "args": {
+          "task_id": "t2_estimate",
+          "plan_id": "plan-standard"
+        },
+        "rationale": "核算 plan-standard 是否在预算与截止时间内"
+      },
+      "observation": {
+        "action": "estimate_cost",
+        "ok": true,
+        "summary": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 5",
+        "cost_units": 0.2,
+        "payload": {
+          "plan_id": "plan-standard",
+          "plan_name": "图文 + 短视频 + 腰部达人",
+          "base_cost_units": 12,
+          "duration_days": 7,
+          "steps": [
+            "确定主题与人群切分",
+            "检索历史素材与达人报价",
+            "生成 5 篇脚本（含 2 条短视频脚本）",
+            "接洽 2 位腰部达人",
+            "发起 UGC 征集作为承接",
+            "汇总数据并复盘"
+          ],
+          "sim_latency_s": 0.1,
+          "violations": [
+            "成本 12 超出预算 5"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 3,
+        "tool_calls": 2,
+        "tool_spend": 0.7,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1_research": "done",
+          "t2_estimate": "done",
+          "t3_draft": "pending",
+          "t4_save": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 4,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "incomplete",
+          "reason": "没有可行方案：图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 5。已否决 plan-standard；需要追加预算（当前 5）或放宽截止（当前 7 天）"
+        },
+        "rationale": "所有候选方案都超约束，明确返回未完成而不是硬保存"
+      },
+      "observation": {
+        "action": "finish",
+        "ok": false,
+        "summary": "任务结束",
+        "cost_units": 0.0,
+        "payload": {
+          "status": "incomplete",
+          "reason": "没有可行方案：图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 5。已否决 plan-standard；需要追加预算（当前 5）或放宽截止（当前 7 天）"
+        },
+        "error": "INCOMPLETE: 没有可行方案：图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 5。已否决 plan-standard；需要追加预算（当前 5）或放宽截止（当前 7 天）"
+      },
+      "state_after": {
+        "turns": 4,
+        "tool_calls": 2,
+        "tool_spend": 0.7,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1_research": "done",
+          "t2_estimate": "done",
+          "t3_draft": "pending",
+          "t4_save": "pending"
+        },
+        "saved_path": null
+      }
+    }
+  ]
+}

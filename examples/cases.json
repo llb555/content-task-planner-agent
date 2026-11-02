@@ -1,0 +1,92 @@
+{
+  "cases": [
+    {
+      "id": "normal",
+      "title": "正常完成：预算 10，初始方案估算 12 超限，改用 8 的方案",
+      "topic": "春季新品",
+      "budget_units": 10,
+      "deadline_days": 7,
+      "audience": "校园人群",
+      "proposed_plan": "plan-standard",
+      "fail_on": {},
+      "covers": ["正常完成", "预算超限重规划", "模型选择动作→执行→观察→调整"]
+    },
+    {
+      "id": "missing-budget",
+      "title": "缺预算与截止时间：约束缺失时仍给出方案并说明假设",
+      "topic": "春季新品",
+      "budget_units": null,
+      "deadline_days": null,
+      "audience": "校园人群",
+      "proposed_plan": "plan-standard",
+      "fail_on": {},
+      "covers": ["缺预算或截止时间"]
+    },
+    {
+      "id": "tool-failure",
+      "title": "工具失败：脚本生成首次失败，缩小规模重试并保留已完成步骤",
+      "topic": "春季新品",
+      "budget_units": 10,
+      "deadline_days": 7,
+      "audience": "校园人群",
+      "proposed_plan": "plan-standard",
+      "fail_on": { "draft_script": 1 },
+      "covers": ["工具失败", "部分成功结果保留"]
+    },
+    {
+      "id": "tool-failure-twice",
+      "title": "工具连续失败：脚本生成失败两次，改计划只保存方案框架",
+      "topic": "春季新品",
+      "budget_units": 10,
+      "deadline_days": 7,
+      "audience": "校园人群",
+      "proposed_plan": "plan-standard",
+      "fail_on": { "draft_script": [1, 2] },
+      "covers": ["工具失败", "重规划后仍保留成功步骤"]
+    },
+    {
+      "id": "no-feasible-plan",
+      "title": "预算超限且无替代：预算 5 低于最便宜的 8，返回未完成及缺口",
+      "topic": "春季新品",
+      "budget_units": 5,
+      "deadline_days": 7,
+      "audience": "校园人群",
+      "proposed_plan": "plan-standard",
+      "fail_on": {},
+      "covers": ["预算超限", "未完成及缺口"]
+    },
+    {
+      "id": "deadline-tight",
+      "title": "截止时间过紧：只接受 5 天内的方案，7 天与 14 天的方案都被否决",
+      "topic": "春季新品",
+      "budget_units": 30,
+      "deadline_days": 5,
+      "audience": "校园人群",
+      "proposed_plan": "plan-standard",
+      "fail_on": {},
+      "covers": ["截止时间超限", "多约束重规划"]
+    },
+    {
+      "id": "tool-failure-incomplete",
+      "title": "保存工具连续失败：两次保存失败后返回未完成，不把失败步骤记为成功",
+      "topic": "春季新品",
+      "budget_units": 10,
+      "deadline_days": 7,
+      "audience": "校园人群",
+      "proposed_plan": "plan-standard",
+      "fail_on": { "save_plan": [1, 2] },
+      "covers": ["工具失败", "未完成状态"]
+    },
+    {
+      "id": "budget15",
+      "title": "对照：预算 15 时不应触发重规划，直接采纳初始方案",
+      "topic": "春季新品",
+      "budget_units": 15,
+      "deadline_days": 7,
+      "audience": "校园人群",
+      "proposed_plan": "plan-standard",
+      "fail_on": {},
+      "covers": ["对照实验：重规划由约束驱动而非固定流程"]
+    }
+  ]
+}

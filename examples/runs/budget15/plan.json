@@ -1,0 +1,17 @@
+{
+  "plan_id": "plan-standard",
+  "plan_name": "图文 + 短视频 + 腰部达人",
+  "plan_cost_units": 12.0,
+  "duration_days": 7,
+  "steps": [
+    "确定主题与人群切分",
+    "检索历史素材与达人报价",
+    "生成 5 篇脚本（含 2 条短视频脚本）",
+    "接洽 2 位腰部达人",
+    "发起 UGC 征集作为承接",
+    "汇总数据并复盘"
+  ],
+  "drafts_generated": 3,
+  "assumptions": [],
+  "gaps": []
+}

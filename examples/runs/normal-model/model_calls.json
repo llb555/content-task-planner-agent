@@ -1,0 +1,58 @@
+[
+  {
+    "url": "http://127.0.0.1:8326/v1/chat/completions",
+    "model": "deepseek-account/deepseek-flash",
+    "prompt_tokens": 600,
+    "completion_tokens": 719,
+    "retry_note": null
+  },
+  {
+    "url": "http://127.0.0.1:8326/v1/chat/completions",
+    "model": "deepseek-account/deepseek-flash",
+    "prompt_tokens": 1427,
+    "completion_tokens": 22,
+    "retry_note": null
+  },
+  {
+    "url": "http://127.0.0.1:8326/v1/chat/completions",
+    "model": "deepseek-account/deepseek-flash",
+    "prompt_tokens": 1684,
+    "completion_tokens": 391,
+    "retry_note": null
+  },
+  {
+    "url": "http://127.0.0.1:8326/v1/chat/completions",
+    "model": "deepseek-account/deepseek-flash",
+    "prompt_tokens": 2100,
+    "completion_tokens": 23,
+    "retry_note": null
+  },
+  {
+    "url": "http://127.0.0.1:8326/v1/chat/completions",
+    "model": "deepseek-account/deepseek-flash",
+    "prompt_tokens": 2289,
+    "completion_tokens": 67,
+    "retry_note": null
+  },
+  {
+    "url": "http://127.0.0.1:8326/v1/chat/completions",
+    "model": "deepseek-account/deepseek-flash",
+    "prompt_tokens": 2267,
+    "completion_tokens": 172,
+    "retry_note": null
+  },
+  {
+    "url": "http://127.0.0.1:8326/v1/chat/completions",
+    "model": "deepseek-account/deepseek-flash",
+    "prompt_tokens": 2536,
+    "completion_tokens": 62,
+    "retry_note": null
+  },
+  {
+    "url": "http://127.0.0.1:8326/v1/chat/completions",
+    "model": "deepseek-account/deepseek-flash",
+    "prompt_tokens": 2473,
+    "completion_tokens": 229,
+    "retry_note": null
+  }
+]

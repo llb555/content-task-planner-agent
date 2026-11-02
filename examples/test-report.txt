@@ -1,0 +1,30 @@
+============================= test session starts =============================
+collecting ... collected 25 items
+
+tests/test_acceptance.py::test_normal_case_completes_and_saves PASSED    [  4%]
+tests/test_acceptance.py::test_over_budget_switches_to_a_cheaper_plan PASSED [  8%]
+tests/test_acceptance.py::test_control_case_with_enough_budget_does_not_replan PASSED [ 12%]
+tests/test_acceptance.py::test_missing_budget_still_produces_a_plan PASSED [ 16%]
+tests/test_acceptance.py::test_missing_deadline_only_is_reported PASSED  [ 20%]
+tests/test_acceptance.py::test_tool_failure_is_observed_and_retried_smaller PASSED [ 24%]
+tests/test_acceptance.py::test_two_failures_lead_to_a_revised_plan_that_keeps_earlier_work PASSED [ 28%]
+tests/test_acceptance.py::test_failed_step_is_never_recorded_as_success PASSED [ 32%]
+tests/test_acceptance.py::test_no_feasible_plan_returns_incomplete_with_the_gap PASSED [ 36%]
+tests/test_acceptance.py::test_deadline_constraint_can_also_force_a_replan PASSED [ 40%]
+tests/test_acceptance.py::test_repeated_runs_are_deterministic PASSED    [ 44%]
+tests/test_acceptance.py::test_trace_shows_an_observation_driven_revision PASSED [ 48%]
+tests/test_acceptance.py::test_every_turn_records_the_state_it_left_behind PASSED [ 52%]
+tests/test_acceptance.py::test_turn_limit_returns_incomplete PASSED      [ 56%]
+tests/test_acceptance.py::test_tool_call_limit_returns_incomplete PASSED [ 60%]
+tests/test_acceptance.py::test_invalid_actions_are_capped PASSED         [ 64%]
+tests/test_acceptance.py::test_plan_validation_rejects_cycles_and_unknown_deps PASSED [ 68%]
+tests/test_acceptance.py::test_dependency_violation_is_refused PASSED    [ 72%]
+tests/test_acceptance.py::test_tool_spend_matches_the_sum_of_observations PASSED [ 76%]
+tests/test_acceptance.py::test_estimate_matches_the_catalog PASSED       [ 80%]
+tests/test_acceptance.py::test_save_plan_refuses_an_over_budget_plan PASSED [ 84%]
+tests/test_acceptance.py::test_resume_reopens_failed_tasks_and_finishes PASSED [ 88%]
+tests/test_acceptance.py::test_model_reply_parsing_accepts_json_and_fences PASSED [ 92%]
+tests/test_acceptance.py::test_model_policy_requires_a_key PASSED        [ 96%]
+tests/test_acceptance.py::test_model_policy_builds_a_prompt_with_the_last_observation PASSED [100%]
+
+============================= 25 passed in 0.60s ==============================

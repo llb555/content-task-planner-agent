@@ -1,0 +1,561 @@
+{
+  "brief": {
+    "topic": "春季新品",
+    "budget_units": 5,
+    "deadline_days": 7,
+    "audience": "校园人群",
+    "proposed_plan": "plan-standard"
+  },
+  "policy": "model",
+  "charge_tools_to_budget": false,
+  "status": "incomplete",
+  "incomplete_reason": "预算硬约束无法满足：运营提出的 plan-standard 实测成本 12 单位（>预算 5），降级的 plan-lean 实测 8 单位（>预算 5），进一步降级的 plan-minimal 不存在（可用方案仅 plan-heavy/plan-lean/plan-standard，其中 plan-heavy 成本更高）。在 7 天截止与 5 单位预算内不存在可执行方案，故按规则不硬保存，返回未完成。建议运营方将预算提高至至少 8 单位（plan-lean）或缩小活动规模为纯单图文/UGC 并重新提供方案定义。已完成并保留的步骤：素材检索任务 t1 未执行（因方案未定，避免浪费工具费用）；已完成成本验证 t2（plan-standard=12）、t5（plan-lean=8）。",
+  "plan": {
+    "version": 3,
+    "revision_reason": "plan-lean 实际成本 8 单位同样超出预算 5，已拒绝并加入 rejected_plans；在放弃前再做一次降级验证，估算更轻的 plan-minimal（单图文/UGC 为主），若仍超预算或不可用则返回未完成，不硬保存。",
+    "tasks": [
+      {
+        "id": "t1",
+        "name": "检索春季新品校园人群素材",
+        "tool": "search_materials",
+        "depends_on": [],
+        "status": "pending",
+        "attempts": 0,
+        "cost_units": 0.0,
+        "detail": ""
+      },
+      {
+        "id": "t2",
+        "name": "估算 plan-standard 成本",
+        "tool": "estimate_cost",
+        "depends_on": [],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.2,
+        "detail": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天"
+      },
+      {
+        "id": "t5",
+        "name": "估算 plan-lean 成本",
+        "tool": "estimate_cost",
+        "depends_on": [],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.2,
+        "detail": "轻量图文 + UGC 征集 预计 8 单位 / 5 天"
+      },
+      {
+        "id": "t6",
+        "name": "估算 plan-minimal 成本",
+        "tool": "estimate_cost",
+        "depends_on": [],
+        "status": "failed",
+        "attempts": 1,
+        "cost_units": 0.2,
+        "detail": "UNKNOWN_PLAN: plan-minimal"
+      },
+      {
+        "id": "t3",
+        "name": "撰写活动脚本（采用通过预算校验的方案）",
+        "tool": "draft_script",
+        "depends_on": [
+          "t1",
+          "t6"
+        ],
+        "status": "pending",
+        "attempts": 0,
+        "cost_units": 0.0,
+        "detail": ""
+      },
+      {
+        "id": "t4",
+        "name": "保存最终方案",
+        "tool": "save_plan",
+        "depends_on": [
+          "t3"
+        ],
+        "status": "pending",
+        "attempts": 0,
+        "cost_units": 0.0,
+        "detail": ""
+      }
+    ]
+  },
+  "costs": {
+    "tool_spend": 0.6,
+    "plan_cost": null,
+    "total": 0.0,
+    "all_in": 0.6,
+    "budget": 5,
+    "remaining": 5.0,
+    "by_tool": {
+      "estimate_cost": 0.6
+    }
+  },
+  "drafts": 0,
+  "notes": [
+    "计划 v1：按规则先估算运营提出的 plan-standard，再依据真实成本决定是否换更便宜方案；预算5单位、7天为硬约束。先并行检索素材以节省轮次。",
+    "成本 12 超出预算 5（plan-standard）",
+    "计划 v2：plan-standard 实际成本 12 单位，超出预算 5，已拒绝；改用更便宜的 plan-lean，并先验证其成本是否满足预算与 7 天截止约束。保留已完成的 plan-standard 估算任务 t2。",
+    "成本 8 超出预算 5（plan-lean）",
+    "计划 v3：plan-lean 实际成本 8 单位同样超出预算 5，已拒绝并加入 rejected_plans；在放弃前再做一次降级验证，估算更轻的 plan-minimal（单图文/UGC 为主），若仍超预算或不可用则返回未完成，不硬保存。"
+  ],
+  "rejected_plans": [
+    "plan-standard",
+    "plan-lean"
+  ],
+  "saved_plan_path": null,
+  "saved_plan_id": null,
+  "turns": 7,
+  "tool_calls": 3,
+  "invalid_actions": 0,
+  "trace": [
+    {
+      "turn": 1,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1",
+              "name": "检索春季新品校园人群素材",
+              "tool": "search_materials",
+              "depends_on": []
+            },
+            {
+              "id": "t2",
+              "name": "估算 plan-standard 成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t3",
+              "name": "撰写活动脚本（方案按成本结果确定）",
+              "tool": "draft_script",
+              "depends_on": [
+                "t1",
+                "t2"
+              ]
+            },
+            {
+              "id": "t4",
+              "name": "保存最终方案",
+              "tool": "save_plan",
+              "depends_on": [
+                "t3"
+              ]
+            }
+          ],
+          "reason": "按规则先估算运营提出的 plan-standard，再依据真实成本决定是否换更便宜方案；预算5单位、7天为硬约束。先并行检索素材以节省轮次。"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"plan_tasks\",\"args\":{\"tasks\":[{\"id\":\"t1\",\"name\":\"检索春季新品校园人群素材\",\"tool\":\"search_materials\",\"depends_on\":[]},{\"id\":\"t2\",\"name\":\"估算 plan-standard 成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t3\",\"name\":\"撰写活动脚本（方案按成本结果确定）\",\"tool\":\"draft_script\",\"depends_on\":[\"t1\",\"t2\"]},{\"id\":\"t4\",\"name\":\"保存最终方案\",\"tool\":\"save_plan\",\"depends_on\":[\"t3\"]}],\"reason\":\"按规则先估算运营提出的 plan-standard，再依据真实成本决定是否换更便宜方案；预算5单位、7天为硬约束。先并行检索素材以节省轮次。\"}}"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v1 已就绪，共 4 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 1,
+          "tasks": [
+            "t1",
+            "t2",
+            "t3",
+            "t4"
+          ],
+          "kept_done": []
+        }
+      },
+      "state_after": {
+        "turns": 1,
+        "tool_calls": 0,
+        "tool_spend": 0.0,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1": "pending",
+          "t2": "pending",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 2,
+      "decision": {
+        "action": "estimate_cost",
+        "args": {
+          "task_id": "t2",
+          "plan_id": "plan-standard"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"estimate_cost\",\"args\":{\"task_id\":\"t2\",\"plan_id\":\"plan-standard\"}}"
+      },
+      "observation": {
+        "action": "estimate_cost",
+        "ok": true,
+        "summary": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 5",
+        "cost_units": 0.2,
+        "payload": {
+          "plan_id": "plan-standard",
+          "plan_name": "图文 + 短视频 + 腰部达人",
+          "base_cost_units": 12,
+          "duration_days": 7,
+          "steps": [
+            "确定主题与人群切分",
+            "检索历史素材与达人报价",
+            "生成 5 篇脚本（含 2 条短视频脚本）",
+            "接洽 2 位腰部达人",
+            "发起 UGC 征集作为承接",
+            "汇总数据并复盘"
+          ],
+          "sim_latency_s": 0.1,
+          "violations": [
+            "成本 12 超出预算 5"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 2,
+        "tool_calls": 1,
+        "tool_spend": 0.2,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1": "pending",
+          "t2": "done",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 3,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1",
+              "name": "检索春季新品校园人群素材",
+              "tool": "search_materials",
+              "depends_on": []
+            },
+            {
+              "id": "t2",
+              "name": "估算 plan-standard 成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t5",
+              "name": "估算 plan-lean 成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t3",
+              "name": "撰写活动脚本（采用 plan-lean）",
+              "tool": "draft_script",
+              "depends_on": [
+                "t1",
+                "t5"
+              ]
+            },
+            {
+              "id": "t4",
+              "name": "保存最终方案 plan-lean",
+              "tool": "save_plan",
+              "depends_on": [
+                "t3"
+              ]
+            }
+          ],
+          "reason": "plan-standard 实际成本 12 单位，超出预算 5，已拒绝；改用更便宜的 plan-lean，并先验证其成本是否满足预算与 7 天截止约束。保留已完成的 plan-standard 估算任务 t2。"
+        },
+        "rationale": "plan-standard 超预算，修订计划改用 plan-lean 并新增成本估算任务",
+        "raw_reply": "{\"action\":\"plan_tasks\",\"args\":{\"tasks\":[{\"id\":\"t1\",\"name\":\"检索春季新品校园人群素材\",\"tool\":\"search_materials\",\"depends_on\":[]},{\"id\":\"t2\",\"name\":\"估算 plan-standard 成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t5\",\"name\":\"估算 plan-lean 成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t3\",\"name\":\"撰写活动脚本（采用 plan-lean）\",\"tool\":\"draft_script\",\"depends_on\":[\"t1\",\"t5\"]},{\"id\":\"t4\",\"name\":\"保存最终方案 plan-lean\",\"tool\":\"save_plan\",\"depends_on\":[\"t3\"]}],\"reason\":\"plan-standard 实际成本 12 单位，超出预算 5，已拒绝；改用更便宜的 plan-lean，并先验证其成本是否满足预算与 7 天截止约束。保留已完成的 plan-standard 估算任务 t2。\"},\"reason\":\"plan-standard 超预算，修订计划改用 plan-lean 并新增成本估算任务\"}"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v2 已就绪，共 5 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 2,
+          "tasks": [
+            "t1",
+            "t2",
+            "t5",
+            "t3",
+            "t4"
+          ],
+          "kept_done": [
+            "t2"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 3,
+        "tool_calls": 1,
+        "tool_spend": 0.2,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "pending",
+          "t2": "done",
+          "t5": "pending",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 4,
+      "decision": {
+        "action": "estimate_cost",
+        "args": {
+          "task_id": "t5",
+          "plan_id": "plan-lean"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"estimate_cost\",\"args\":{\"task_id\":\"t5\",\"plan_id\":\"plan-lean\"}}"
+      },
+      "observation": {
+        "action": "estimate_cost",
+        "ok": true,
+        "summary": "轻量图文 + UGC 征集 预计 8 单位 / 5 天 | 超出约束：成本 8 超出预算 5",
+        "cost_units": 0.2,
+        "payload": {
+          "plan_id": "plan-lean",
+          "plan_name": "轻量图文 + UGC 征集",
+          "base_cost_units": 8,
+          "duration_days": 5,
+          "steps": [
+            "确定主题与人群切分",
+            "检索历史素材，确认可复用内容",
+            "生成 3 篇图文脚本（预热 1 篇 / 发布 1 篇 / 长尾 1 篇）",
+            "发起 UGC 征集，设置低门槛参与规则",
+            "汇总数据并复盘"
+          ],
+          "sim_latency_s": 0.1,
+          "violations": [
+            "成本 8 超出预算 5"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 4,
+        "tool_calls": 2,
+        "tool_spend": 0.4,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "pending",
+          "t2": "done",
+          "t5": "done",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 5,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1",
+              "name": "检索春季新品校园人群素材",
+              "tool": "search_materials",
+              "depends_on": []
+            },
+            {
+              "id": "t2",
+              "name": "估算 plan-standard 成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t5",
+              "name": "估算 plan-lean 成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t6",
+              "name": "估算 plan-minimal 成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t3",
+              "name": "撰写活动脚本（采用通过预算校验的方案）",
+              "tool": "draft_script",
+              "depends_on": [
+                "t1",
+                "t6"
+              ]
+            },
+            {
+              "id": "t4",
+              "name": "保存最终方案",
+              "tool": "save_plan",
+              "depends_on": [
+                "t3"
+              ]
+            }
+          ],
+          "reason": "plan-lean 实际成本 8 单位同样超出预算 5，已拒绝并加入 rejected_plans；在放弃前再做一次降级验证，估算更轻的 plan-minimal（单图文/UGC 为主），若仍超预算或不可用则返回未完成，不硬保存。"
+        },
+        "rationale": "plan-lean 也超预算，尝试最后一个更轻方案的成本验证",
+        "raw_reply": "{\"action\":\"plan_tasks\",\"args\":{\"tasks\":[{\"id\":\"t1\",\"name\":\"检索春季新品校园人群素材\",\"tool\":\"search_materials\",\"depends_on\":[]},{\"id\":\"t2\",\"name\":\"估算 plan-standard 成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t5\",\"name\":\"估算 plan-lean 成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t6\",\"name\":\"估算 plan-minimal 成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t3\",\"name\":\"撰写活动脚本（采用通过预算校验的方案）\",\"tool\":\"draft_script\",\"depends_on\":[\"t1\",\"t6\"]},{\"id\":\"t4\",\"name\":\"保存最终方案\",\"tool\":\"save_plan\",\"depends_on\":[\"t3\"]}],\"reason\":\"plan-lean 实际成本 8 单位同样超出预算 5，已拒绝并加入 rejected_plans；在放弃前再做一次降级验证，估算更轻的 plan-minimal（单图文/UGC 为主），若仍超预算或不可用则返回未完成，不硬保存。\"},\"reason\":\"plan-lean 也超预算，尝试最后一个更轻方案的成本验证\"}"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v3 已就绪，共 6 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 3,
+          "tasks": [
+            "t1",
+            "t2",
+            "t5",
+            "t6",
+            "t3",
+            "t4"
+          ],
+          "kept_done": [
+            "t2",
+            "t5"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 5,
+        "tool_calls": 2,
+        "tool_spend": 0.4,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 3,
+        "task_status": {
+          "t1": "pending",
+          "t2": "done",
+          "t5": "done",
+          "t6": "pending",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 6,
+      "decision": {
+        "action": "estimate_cost",
+        "args": {
+          "task_id": "t6",
+          "plan_id": "plan-minimal"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"estimate_cost\",\"args\":{\"task_id\":\"t6\",\"plan_id\":\"plan-minimal\"}}"
+      },
+      "observation": {
+        "action": "estimate_cost",
+        "ok": false,
+        "summary": "未知方案 'plan-minimal'",
+        "cost_units": 0.2,
+        "payload": {
+          "known_plans": [
+            "plan-heavy",
+            "plan-lean",
+            "plan-standard"
+          ]
+        },
+        "error": "UNKNOWN_PLAN: plan-minimal"
+      },
+      "state_after": {
+        "turns": 6,
+        "tool_calls": 3,
+        "tool_spend": 0.6,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 3,
+        "task_status": {
+          "t1": "pending",
+          "t2": "done",
+          "t5": "done",
+          "t6": "failed",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 7,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "incomplete",
+          "reason": "预算硬约束无法满足：运营提出的 plan-standard 实测成本 12 单位（>预算 5），降级的 plan-lean 实测 8 单位（>预算 5），进一步降级的 plan-minimal 不存在（可用方案仅 plan-heavy/plan-lean/plan-standard，其中 plan-heavy 成本更高）。在 7 天截止与 5 单位预算内不存在可执行方案，故按规则不硬保存，返回未完成。建议运营方将预算提高至至少 8 单位（plan-lean）或缩小活动规模为纯单图文/UGC 并重新提供方案定义。已完成并保留的步骤：素材检索任务 t1 未执行（因方案未定，避免浪费工具费用）；已完成成本验证 t2（plan-standard=12）、t5（plan-lean=8）。"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"finish\",\"args\":{\"status\":\"incomplete\",\"reason\":\"预算硬约束无法满足：运营提出的 plan-standard 实测成本 12 单位（>预算 5），降级的 plan-lean 实测 8 单位（>预算 5），进一步降级的 plan-minimal 不存在（可用方案仅 plan-heavy/plan-lean/plan-standard，其中 plan-heavy 成本更高）。在 7 天截止与 5 单位预算内不存在可执行方案，故按规则不硬保存，返回未完成。建议运营方将预算提高至至少 8 单位（plan-lean）或缩小活动规模为纯单图文/UGC 并重新提供方案定义。已完成并保留的步骤：素材检索任务 t1 未执行（因方案未定，避免浪费工具费用）；已完成成本验证 t2（plan-standard=12）、t5（plan-lean=8）。\"}}"
+      },
+      "observation": {
+        "action": "finish",
+        "ok": false,
+        "summary": "任务结束",
+        "cost_units": 0.0,
+        "payload": {
+          "status": "incomplete",
+          "reason": "预算硬约束无法满足：运营提出的 plan-standard 实测成本 12 单位（>预算 5），降级的 plan-lean 实测 8 单位（>预算 5），进一步降级的 plan-minimal 不存在（可用方案仅 plan-heavy/plan-lean/plan-standard，其中 plan-heavy 成本更高）。在 7 天截止与 5 单位预算内不存在可执行方案，故按规则不硬保存，返回未完成。建议运营方将预算提高至至少 8 单位（plan-lean）或缩小活动规模为纯单图文/UGC 并重新提供方案定义。已完成并保留的步骤：素材检索任务 t1 未执行（因方案未定，避免浪费工具费用）；已完成成本验证 t2（plan-standard=12）、t5（plan-lean=8）。"
+        },
+        "error": "INCOMPLETE: 预算硬约束无法满足：运营提出的 plan-standard 实测成本 12 单位（>预算 5），降级的 plan-lean 实测 8 单位（>预算 5），进一步降级的 plan-minimal 不存在（可用方案仅 plan-heavy/plan-lean/plan-standard，其中 plan-heavy 成本更高）。在 7 天截止与 5 单位预算内不存在可执行方案，故按规则不硬保存，返回未完成。建议运营方将预算提高至至少 8 单位（plan-lean）或缩小活动规模为纯单图文/UGC 并重新提供方案定义。已完成并保留的步骤：素材检索任务 t1 未执行（因方案未定，避免浪费工具费用）；已完成成本验证 t2（plan-standard=12）、t5（plan-lean=8）。"
+      },
+      "state_after": {
+        "turns": 7,
+        "tool_calls": 3,
+        "tool_spend": 0.6,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 5,
+        "remaining": 5.0,
+        "plan_version": 3,
+        "task_status": {
+          "t1": "pending",
+          "t2": "done",
+          "t5": "done",
+          "t6": "failed",
+          "t3": "pending",
+          "t4": "pending"
+        },
+        "saved_path": null
+      }
+    }
+  ]
+}

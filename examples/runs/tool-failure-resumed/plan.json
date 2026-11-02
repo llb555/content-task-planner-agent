@@ -1,0 +1,19 @@
+{
+  "plan_id": "plan-lean",
+  "plan_name": "轻量图文 + UGC 征集",
+  "plan_cost_units": 8.0,
+  "duration_days": 5,
+  "steps": [
+    "确定主题与人群切分",
+    "检索历史素材，确认可复用内容",
+    "生成 3 篇图文脚本（预热 1 篇 / 发布 1 篇 / 长尾 1 篇）",
+    "发起 UGC 征集，设置低门槛参与规则",
+    "汇总数据并复盘"
+  ],
+  "drafts_generated": 3,
+  "assumptions": [
+    "成本 12 超出预算 10（plan-standard）",
+    "续跑：重新打开未完成任务 t4_save"
+  ],
+  "gaps": []
+}

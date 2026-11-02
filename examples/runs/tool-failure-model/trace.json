@@ -1,0 +1,659 @@
+{
+  "case": "tool-failure",
+  "title": "工具失败：脚本生成首次失败，缩小规模重试并保留已完成步骤",
+  "brief": {
+    "topic": "春季新品",
+    "budget_units": 10,
+    "deadline_days": 7,
+    "audience": "校园人群",
+    "proposed_plan": "plan-standard"
+  },
+  "policy": "model",
+  "charge_tools_to_budget": false,
+  "status": "completed",
+  "incomplete_reason": null,
+  "plan": {
+    "version": 3,
+    "revision_reason": "plan-lean 估算 8 单位 / 5 天，满足 10 单位预算与 7 天截止，采用该方案；t4 起草脚本工具报错，按规则缩小规模重试一次（pieces 从 3 降至 2），换新 id t6 并取消其对无结果素材检索 t2 的依赖，已完成步骤 t1/t3/t2 保留。",
+    "tasks": [
+      {
+        "id": "t1",
+        "name": "估算初始方案 plan-standard 的成本",
+        "tool": "estimate_cost",
+        "depends_on": [],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.2,
+        "detail": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天"
+      },
+      {
+        "id": "t3",
+        "name": "估算更省预算的方案 plan-lean 的成本",
+        "tool": "estimate_cost",
+        "depends_on": [],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.2,
+        "detail": "轻量图文 + UGC 征集 预计 8 单位 / 5 天"
+      },
+      {
+        "id": "t2",
+        "name": "检索春季新品面向校园人群的活动素材",
+        "tool": "search_materials",
+        "depends_on": [
+          "t3"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.5,
+        "detail": "未检索到匹配素材"
+      },
+      {
+        "id": "t6",
+        "name": "缩小规模重试起草内容脚本（2 支轻量图文/UGC 脚本）",
+        "tool": "draft_script",
+        "depends_on": [
+          "t3"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 1.333,
+        "detail": "生成 2 篇脚本"
+      },
+      {
+        "id": "t5",
+        "name": "保存最终方案",
+        "tool": "save_plan",
+        "depends_on": [
+          "t6"
+        ],
+        "status": "done",
+        "attempts": 1,
+        "cost_units": 0.3,
+        "detail": "已保存方案到 examples\\runs\\tool-failure-model\\plan.json"
+      }
+    ]
+  },
+  "costs": {
+    "tool_spend": 4.533,
+    "plan_cost": 8.0,
+    "total": 8.0,
+    "all_in": 12.533,
+    "budget": 10,
+    "remaining": 2.0,
+    "by_tool": {
+      "estimate_cost": 0.4,
+      "search_materials": 0.5,
+      "draft_script": 3.333,
+      "save_plan": 0.3
+    }
+  },
+  "drafts": 2,
+  "notes": [
+    "计划 v1：先按运营初始方案 plan-standard 做真实成本估算，确认是否满足 10 单位预算与 7 天截止约束；估算通过后再检索素材并继续脚本与保存步骤。",
+    "成本 12 超出预算 10（plan-standard）",
+    "计划 v2：plan-standard 估算 12 单位，超出 10 单位预算，必须改选更便宜的方案；保留已完成的 t1 估算记录，新增 t3 估算 plan-lean 的真实成本，通过后再检索素材（7 天截止内可完成）、起草脚本并保存。",
+    "计划 v3：plan-lean 估算 8 单位 / 5 天，满足 10 单位预算与 7 天截止，采用该方案；t4 起草脚本工具报错，按规则缩小规模重试一次（pieces 从 3 降至 2），换新 id t6 并取消其对无结果素材检索 t2 的依赖，已完成步骤 t1/t3/t2 保留。"
+  ],
+  "rejected_plans": [
+    "plan-standard"
+  ],
+  "saved_plan_path": "examples\\runs\\tool-failure-model\\plan.json",
+  "saved_plan_id": "plan-lean",
+  "turns": 10,
+  "tool_calls": 6,
+  "invalid_actions": 0,
+  "trace": [
+    {
+      "turn": 1,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1",
+              "name": "估算初始方案 plan-standard 的成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t2",
+              "name": "检索春季新品面向校园人群的活动素材",
+              "tool": "search_materials",
+              "depends_on": [
+                "t1"
+              ]
+            }
+          ],
+          "reason": "先按运营初始方案 plan-standard 做真实成本估算，确认是否满足 10 单位预算与 7 天截止约束；估算通过后再检索素材并继续脚本与保存步骤。"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"plan_tasks\",\"args\":{\"tasks\":[{\"id\":\"t1\",\"name\":\"估算初始方案 plan-standard 的成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t2\",\"name\":\"检索春季新品面向校园人群的活动素材\",\"tool\":\"search_materials\",\"depends_on\":[\"t1\"]}],\"reason\":\"先按运营初始方案 plan-standard 做真实成本估算，确认是否满足 10 单位预算与 7 天截止约束；估算通过后再检索素材并继续脚本与保存步骤。\"}}"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v1 已就绪，共 2 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 1,
+          "tasks": [
+            "t1",
+            "t2"
+          ],
+          "kept_done": []
+        }
+      },
+      "state_after": {
+        "turns": 1,
+        "tool_calls": 0,
+        "tool_spend": 0.0,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1": "pending",
+          "t2": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 2,
+      "decision": {
+        "action": "estimate_cost",
+        "args": {
+          "task_id": "t1",
+          "plan_id": "plan-standard"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"estimate_cost\",\"args\":{\"task_id\":\"t1\",\"plan_id\":\"plan-standard\"}}"
+      },
+      "observation": {
+        "action": "estimate_cost",
+        "ok": true,
+        "summary": "图文 + 短视频 + 腰部达人 预计 12 单位 / 7 天 | 超出约束：成本 12 超出预算 10",
+        "cost_units": 0.2,
+        "payload": {
+          "plan_id": "plan-standard",
+          "plan_name": "图文 + 短视频 + 腰部达人",
+          "base_cost_units": 12,
+          "duration_days": 7,
+          "steps": [
+            "确定主题与人群切分",
+            "检索历史素材与达人报价",
+            "生成 5 篇脚本（含 2 条短视频脚本）",
+            "接洽 2 位腰部达人",
+            "发起 UGC 征集作为承接",
+            "汇总数据并复盘"
+          ],
+          "sim_latency_s": 0.1,
+          "violations": [
+            "成本 12 超出预算 10"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 2,
+        "tool_calls": 1,
+        "tool_spend": 0.2,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 1,
+        "task_status": {
+          "t1": "done",
+          "t2": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 3,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1",
+              "name": "估算初始方案 plan-standard 的成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t3",
+              "name": "估算更省预算的方案 plan-lean 的成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t2",
+              "name": "检索春季新品面向校园人群的活动素材",
+              "tool": "search_materials",
+              "depends_on": [
+                "t3"
+              ]
+            },
+            {
+              "id": "t4",
+              "name": "按通过预算的方案起草内容脚本",
+              "tool": "draft_script",
+              "depends_on": [
+                "t2"
+              ]
+            },
+            {
+              "id": "t5",
+              "name": "保存最终方案",
+              "tool": "save_plan",
+              "depends_on": [
+                "t4"
+              ]
+            }
+          ],
+          "reason": "plan-standard 估算 12 单位，超出 10 单位预算，必须改选更便宜的方案；保留已完成的 t1 估算记录，新增 t3 估算 plan-lean 的真实成本，通过后再检索素材（7 天截止内可完成）、起草脚本并保存。"
+        },
+        "rationale": "plan-standard 超出预算，修订计划改选更省成本的 plan-lean 并先做真实成本估算",
+        "raw_reply": "{\"action\":\"plan_tasks\",\"args\":{\"tasks\":[{\"id\":\"t1\",\"name\":\"估算初始方案 plan-standard 的成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t3\",\"name\":\"估算更省预算的方案 plan-lean 的成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t2\",\"name\":\"检索春季新品面向校园人群的活动素材\",\"tool\":\"search_materials\",\"depends_on\":[\"t3\"]},{\"id\":\"t4\",\"name\":\"按通过预算的方案起草内容脚本\",\"tool\":\"draft_script\",\"depends_on\":[\"t2\"]},{\"id\":\"t5\",\"name\":\"保存最终方案\",\"tool\":\"save_plan\",\"depends_on\":[\"t4\"]}],\"reason\":\"plan-standard 估算 12 单位，超出 10 单位预算，必须改选更便宜的方案；保留已完成的 t1 估算记录，新增 t3 估算 plan-lean 的真实成本，通过后再检索素材（7 天截止内可完成）、起草脚本并保存。\"},\"reason\":\"plan-standard 超出预算，修订计划改选更省成本的 plan-lean 并先做真实成本估算\"}"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v2 已就绪，共 5 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 2,
+          "tasks": [
+            "t1",
+            "t3",
+            "t2",
+            "t4",
+            "t5"
+          ],
+          "kept_done": [
+            "t1"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 3,
+        "tool_calls": 1,
+        "tool_spend": 0.2,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "done",
+          "t3": "pending",
+          "t2": "pending",
+          "t4": "pending",
+          "t5": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 4,
+      "decision": {
+        "action": "estimate_cost",
+        "args": {
+          "task_id": "t3",
+          "plan_id": "plan-lean"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"estimate_cost\",\"args\":{\"task_id\":\"t3\",\"plan_id\":\"plan-lean\"}}"
+      },
+      "observation": {
+        "action": "estimate_cost",
+        "ok": true,
+        "summary": "轻量图文 + UGC 征集 预计 8 单位 / 5 天",
+        "cost_units": 0.2,
+        "payload": {
+          "plan_id": "plan-lean",
+          "plan_name": "轻量图文 + UGC 征集",
+          "base_cost_units": 8,
+          "duration_days": 5,
+          "steps": [
+            "确定主题与人群切分",
+            "检索历史素材，确认可复用内容",
+            "生成 3 篇图文脚本（预热 1 篇 / 发布 1 篇 / 长尾 1 篇）",
+            "发起 UGC 征集，设置低门槛参与规则",
+            "汇总数据并复盘"
+          ],
+          "sim_latency_s": 0.1
+        }
+      },
+      "state_after": {
+        "turns": 4,
+        "tool_calls": 2,
+        "tool_spend": 0.4,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "done",
+          "t3": "done",
+          "t2": "pending",
+          "t4": "pending",
+          "t5": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 5,
+      "decision": {
+        "action": "search_materials",
+        "args": {
+          "task_id": "t2",
+          "query": "春季新品 校园人群 UGC 征集 轻量图文 素材"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"search_materials\",\"args\":{\"task_id\":\"t2\",\"query\":\"春季新品 校园人群 UGC 征集 轻量图文 素材\"}}"
+      },
+      "observation": {
+        "action": "search_materials",
+        "ok": true,
+        "summary": "未检索到匹配素材",
+        "cost_units": 0.5,
+        "payload": {
+          "query": "春季新品 校园人群 UGC 征集 轻量图文 素材",
+          "materials": [],
+          "sim_latency_s": 0.3
+        }
+      },
+      "state_after": {
+        "turns": 5,
+        "tool_calls": 3,
+        "tool_spend": 0.9,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "done",
+          "t3": "done",
+          "t2": "done",
+          "t4": "pending",
+          "t5": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 6,
+      "decision": {
+        "action": "draft_script",
+        "args": {
+          "task_id": "t4",
+          "plan_id": "plan-lean",
+          "pieces": 3
+        },
+        "rationale": "plan-lean 估算 8 单位 / 5 天，符合 10 单位预算与 7 天截止；素材检索虽返回空结果（工具本身成功，且已用宽口径关键词覆盖 UGC 征集/轻量图文方向），不再耗轮次重试，直接按 plan-lean 的「轻量图文 + UGC 征集」框架为校园人群起草 3 条脚本，素材缺口在后续说明中标注。",
+        "raw_reply": "{\"action\":\"draft_script\",\"args\":{\"task_id\":\"t4\",\"plan_id\":\"plan-lean\",\"pieces\":3},\"reason\":\"plan-lean 估算 8 单位 / 5 天，符合 10 单位预算与 7 天截止；素材检索虽返回空结果（工具本身成功，且已用宽口径关键词覆盖 UGC 征集/轻量图文方向），不再耗轮次重试，直接按 plan-lean 的「轻量图文 + UGC 征集」框架为校园人群起草 3 条脚本，素材缺口在后续说明中标注。\"}"
+      },
+      "observation": {
+        "action": "draft_script",
+        "ok": false,
+        "summary": "脚本生成工具调用失败",
+        "cost_units": 2.0,
+        "payload": {
+          "sim_latency_s": 1.2
+        },
+        "error": "TOOL_ERROR: draft_script"
+      },
+      "state_after": {
+        "turns": 6,
+        "tool_calls": 4,
+        "tool_spend": 2.9,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 2,
+        "task_status": {
+          "t1": "done",
+          "t3": "done",
+          "t2": "done",
+          "t4": "failed",
+          "t5": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 7,
+      "decision": {
+        "action": "plan_tasks",
+        "args": {
+          "tasks": [
+            {
+              "id": "t1",
+              "name": "估算初始方案 plan-standard 的成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t3",
+              "name": "估算更省预算的方案 plan-lean 的成本",
+              "tool": "estimate_cost",
+              "depends_on": []
+            },
+            {
+              "id": "t2",
+              "name": "检索春季新品面向校园人群的活动素材",
+              "tool": "search_materials",
+              "depends_on": [
+                "t3"
+              ]
+            },
+            {
+              "id": "t6",
+              "name": "缩小规模重试起草内容脚本（2 支轻量图文/UGC 脚本）",
+              "tool": "draft_script",
+              "depends_on": [
+                "t3"
+              ]
+            },
+            {
+              "id": "t5",
+              "name": "保存最终方案",
+              "tool": "save_plan",
+              "depends_on": [
+                "t6"
+              ]
+            }
+          ],
+          "reason": "plan-lean 估算 8 单位 / 5 天，满足 10 单位预算与 7 天截止，采用该方案；t4 起草脚本工具报错，按规则缩小规模重试一次（pieces 从 3 降至 2），换新 id t6 并取消其对无结果素材检索 t2 的依赖，已完成步骤 t1/t3/t2 保留。"
+        },
+        "rationale": "修订计划：draft_script 失败后缩小规模重试一次",
+        "raw_reply": "{\"action\":\"plan_tasks\",\"args\":{\"tasks\":[{\"id\":\"t1\",\"name\":\"估算初始方案 plan-standard 的成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t3\",\"name\":\"估算更省预算的方案 plan-lean 的成本\",\"tool\":\"estimate_cost\",\"depends_on\":[]},{\"id\":\"t2\",\"name\":\"检索春季新品面向校园人群的活动素材\",\"tool\":\"search_materials\",\"depends_on\":[\"t3\"]},{\"id\":\"t6\",\"name\":\"缩小规模重试起草内容脚本（2 支轻量图文/UGC 脚本）\",\"tool\":\"draft_script\",\"depends_on\":[\"t3\"]},{\"id\":\"t5\",\"name\":\"保存最终方案\",\"tool\":\"save_plan\",\"depends_on\":[\"t6\"]}],\"reason\":\"plan-lean 估算 8 单位 / 5 天，满足 10 单位预算与 7 天截止，采用该方案；t4 起草脚本工具报错，按规则缩小规模重试一次（pieces 从 3 降至 2），换新 id t6 并取消其对无结果素材检索 t2 的依赖，已完成步骤 t1/t3/t2 保留。\"},\"reason\":\"修订计划：draft_script 失败后缩小规模重试一次\"}"
+      },
+      "observation": {
+        "action": "plan_tasks",
+        "ok": true,
+        "summary": "计划 v3 已就绪，共 5 个任务",
+        "cost_units": 0.0,
+        "payload": {
+          "version": 3,
+          "tasks": [
+            "t1",
+            "t3",
+            "t2",
+            "t6",
+            "t5"
+          ],
+          "kept_done": [
+            "t1",
+            "t3",
+            "t2"
+          ]
+        }
+      },
+      "state_after": {
+        "turns": 7,
+        "tool_calls": 4,
+        "tool_spend": 2.9,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 3,
+        "task_status": {
+          "t1": "done",
+          "t3": "done",
+          "t2": "done",
+          "t6": "pending",
+          "t5": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 8,
+      "decision": {
+        "action": "draft_script",
+        "args": {
+          "task_id": "t6",
+          "plan_id": "plan-lean",
+          "pieces": 2
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"draft_script\",\"args\":{\"task_id\":\"t6\",\"plan_id\":\"plan-lean\",\"pieces\":2}}"
+      },
+      "observation": {
+        "action": "draft_script",
+        "ok": true,
+        "summary": "生成 2 篇脚本",
+        "cost_units": 1.333,
+        "payload": {
+          "plan_id": "plan-lean",
+          "drafts": [
+            {
+              "index": 1,
+              "title": "轻量图文 + UGC 征集 · 脚本 1",
+              "channel": "图文",
+              "hook": "用一句话讲清「轻量图文 + UGC 征集」的第 1 个卖点"
+            },
+            {
+              "index": 2,
+              "title": "轻量图文 + UGC 征集 · 脚本 2",
+              "channel": "图文",
+              "hook": "用一句话讲清「轻量图文 + UGC 征集」的第 2 个卖点"
+            }
+          ],
+          "sim_latency_s": 0.8
+        }
+      },
+      "state_after": {
+        "turns": 8,
+        "tool_calls": 5,
+        "tool_spend": 4.233,
+        "plan_cost": null,
+        "total_cost": 0.0,
+        "budget": 10,
+        "remaining": 10.0,
+        "plan_version": 3,
+        "task_status": {
+          "t1": "done",
+          "t3": "done",
+          "t2": "done",
+          "t6": "done",
+          "t5": "pending"
+        },
+        "saved_path": null
+      }
+    },
+    {
+      "turn": 9,
+      "decision": {
+        "action": "save_plan",
+        "args": {
+          "task_id": "t5",
+          "plan_id": "plan-lean"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"save_plan\",\"args\":{\"task_id\":\"t5\",\"plan_id\":\"plan-lean\"}}"
+      },
+      "observation": {
+        "action": "save_plan",
+        "ok": true,
+        "summary": "已保存方案到 examples\\runs\\tool-failure-model\\plan.json",
+        "cost_units": 0.3,
+        "payload": {
+          "path": "examples\\runs\\tool-failure-model\\plan.json",
+          "plan_id": "plan-lean",
+          "plan_cost_units": 8.0,
+          "gaps": [],
+          "sim_latency_s": 0.2
+        }
+      },
+      "state_after": {
+        "turns": 9,
+        "tool_calls": 6,
+        "tool_spend": 4.533,
+        "plan_cost": 8.0,
+        "total_cost": 8.0,
+        "budget": 10,
+        "remaining": 2.0,
+        "plan_version": 3,
+        "task_status": {
+          "t1": "done",
+          "t3": "done",
+          "t2": "done",
+          "t6": "done",
+          "t5": "done"
+        },
+        "saved_path": "examples\\runs\\tool-failure-model\\plan.json"
+      }
+    },
+    {
+      "turn": 10,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "completed",
+          "reason": "已按运营初始方案 plan-standard 完成真实成本估算（12 单位），超出 10 单位预算，遂改用 plan-lean（8 单位 / 5 天，满足预算与 7 天截止）。素材检索未命中，但缩小规模重试脚本起草成功（2 篇轻量图文/UGC 脚本），最终方案已成功保存到 examples\\runs\\tool-failure-model\\plan.json。"
+        },
+        "rationale": "",
+        "raw_reply": "{\"action\":\"finish\",\"args\":{\"status\":\"completed\",\"reason\":\"已按运营初始方案 plan-standard 完成真实成本估算（12 单位），超出 10 单位预算，遂改用 plan-lean（8 单位 / 5 天，满足预算与 7 天截止）。素材检索未命中，但缩小规模重试脚本起草成功（2 篇轻量图文/UGC 脚本），最终方案已成功保存到 examples\\\\runs\\\\tool-failure-model\\\\plan.json。\"}}"
+      },
+      "observation": {
+        "action": "finish",
+        "ok": true,
+        "summary": "任务结束",
+        "cost_units": 0.0,
+        "payload": {
+          "status": "completed",
+          "reason": null
+        }
+      },
+      "state_after": {
+        "turns": 10,
+        "tool_calls": 6,
+        "tool_spend": 4.533,
+        "plan_cost": 8.0,
+        "total_cost": 8.0,
+        "budget": 10,
+        "remaining": 2.0,
+        "plan_version": 3,
+        "task_status": {
+          "t1": "done",
+          "t3": "done",
+          "t2": "done",
+          "t6": "done",
+          "t5": "done"
+        },
+        "saved_path": "examples\\runs\\tool-failure-model\\plan.json"
+      }
+    }
+  ]
+}

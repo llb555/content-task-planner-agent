@@ -1,0 +1,161 @@
+{
+  "materials": [
+    {
+      "id": "mat-001",
+      "title": "2026 春季新品发布节奏观察",
+      "topic_tags": ["春季", "新品", "发布"],
+      "summary": "头部品牌普遍采用「预热两周 + 集中发布 + 长尾种草」三段式，预热期互动率最高。",
+      "key_points": [
+        "预热期（T-14 至 T-3）承担 60% 的期待值积累",
+        "发布日集中投放，单日预算占比可达 35%",
+        "长尾期以素人测评为主，成本低但转化周期长"
+      ],
+      "reliability": "high",
+      "source": "synthetic-industry-report"
+    },
+    {
+      "id": "mat-002",
+      "title": "短周期内容活动的常见失败模式",
+      "topic_tags": ["短周期", "风险", "复盘"],
+      "summary": "预算集中在发布日、缺少预热、素材一次性投放是三类高频失败原因。",
+      "key_points": [
+        "没有预热直接发布，首日曝光常低于预期 40%",
+        "素材一次投完，后续无内容可承接流量",
+        "预算超支多发生在临时加投"
+      ],
+      "reliability": "high",
+      "source": "synthetic-postmortem"
+    },
+    {
+      "id": "mat-003",
+      "title": "校园场景内容偏好",
+      "topic_tags": ["校园", "学生", "互动"],
+      "summary": "校园人群对「参与感强、门槛低」的内容形式响应更好，UGC 征集类活动完播率更高。",
+      "key_points": [
+        "征集类活动参与门槛低，扩散靠参与者自发传播",
+        "图文比长视频更适合碎片化浏览",
+        "线下联动能显著提升真实参与率"
+      ],
+      "reliability": "medium",
+      "source": "synthetic-survey"
+    },
+    {
+      "id": "mat-004",
+      "title": "低成本内容形式成本参考",
+      "topic_tags": ["成本", "预算", "形式"],
+      "summary": "图文、UGC 征集、社群运营的单位成本显著低于视频拍摄与达人合作。",
+      "key_points": [
+        "图文单篇成本约为短视频的 1/4",
+        "UGC 征集的主要成本在奖品与运营人力",
+        "社群运营适合长周期低成本维系"
+      ],
+      "reliability": "medium",
+      "source": "synthetic-cost-table"
+    },
+    {
+      "id": "mat-005",
+      "title": "KOL 合作报价区间（合成数据）",
+      "topic_tags": ["KOL", "达人", "报价"],
+      "summary": "腰部达人单条报价区间宽，头部达人成本高且档期紧张，短周期项目风险大。",
+      "key_points": [
+        "头部达人档期通常需提前 3 周以上预约",
+        "腰部达人性价比高，但内容质量波动大",
+        "短周期项目使用头部达人的投入产出比不稳定"
+      ],
+      "reliability": "low",
+      "source": "synthetic-rate-card"
+    },
+    {
+      "id": "mat-006",
+      "title": "内容活动效果衡量指标",
+      "topic_tags": ["指标", "评估", "复盘"],
+      "summary": "曝光、互动率、参与人数、内容产出量是短周期活动最常用的四个衡量维度。",
+      "key_points": [
+        "曝光高但互动低通常说明内容与人群不匹配",
+        "参与人数是 UGC 类活动的核心指标",
+        "复盘应在活动结束后 3 天内完成"
+      ],
+      "reliability": "high",
+      "source": "synthetic-metrics-guide"
+    }
+  ],
+  "tool_costs": [
+    {
+      "tool": "search_materials",
+      "unit": "次",
+      "cost_units": 0.5,
+      "latency_s": 0.3,
+      "note": "素材检索，按关键词返回匹配素材"
+    },
+    {
+      "tool": "draft_script",
+      "unit": "篇",
+      "cost_units": 2.0,
+      "latency_s": 1.2,
+      "note": "生成内容脚本，按方案复杂度计价"
+    },
+    {
+      "tool": "estimate_cost",
+      "unit": "次",
+      "cost_units": 0.2,
+      "latency_s": 0.1,
+      "note": "按方案计算预算与耗时"
+    },
+    {
+      "tool": "save_plan",
+      "unit": "次",
+      "cost_units": 0.3,
+      "latency_s": 0.2,
+      "note": "保存最终方案"
+    }
+  ],
+  "plan_variants": [
+    {
+      "id": "plan-lean",
+      "name": "轻量图文 + UGC 征集",
+      "base_cost_units": 8,
+      "duration_days": 5,
+      "required_tools": ["search_materials", "draft_script", "estimate_cost", "save_plan"],
+      "steps": [
+        "确定主题与人群切分",
+        "检索历史素材，确认可复用内容",
+        "生成 3 篇图文脚本（预热 1 篇 / 发布 1 篇 / 长尾 1 篇）",
+        "发起 UGC 征集，设置低门槛参与规则",
+        "汇总数据并复盘"
+      ],
+      "risk_notes": "内容形式单一，若人群不匹配则扩散有限"
+    },
+    {
+      "id": "plan-standard",
+      "name": "图文 + 短视频 + 腰部达人",
+      "base_cost_units": 12,
+      "duration_days": 7,
+      "required_tools": ["search_materials", "draft_script", "estimate_cost", "save_plan"],
+      "steps": [
+        "确定主题与人群切分",
+        "检索历史素材与达人报价",
+        "生成 5 篇脚本（含 2 条短视频脚本）",
+        "接洽 2 位腰部达人",
+        "发起 UGC 征集作为承接",
+        "汇总数据并复盘"
+      ],
+      "risk_notes": "达人内容质量波动大，短周期内难以二次调整"
+    },
+    {
+      "id": "plan-heavy",
+      "name": "全渠道整合 + 头部达人",
+      "base_cost_units": 18,
+      "duration_days": 14,
+      "required_tools": ["search_materials", "draft_script", "estimate_cost", "save_plan"],
+      "steps": [
+        "确定主题与人群切分",
+        "检索历史素材与全渠道资源位",
+        "生成 10 篇脚本（含 4 条视频脚本）",
+        "接洽头部达人并锁定档期",
+        "多平台投放与社群运营",
+        "汇总数据并复盘"
+      ],
+      "risk_notes": "头部达人档期需提前 3 周，短周期项目极易延期"
+    }
+  ]
+}
