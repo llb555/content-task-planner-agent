@@ -118,7 +118,9 @@ tests/
   test_acceptance.py 25 项验收测试
 examples/
   cases.json         8 个场景定义（含对照实验）
-  runs/              每个场景的实际输出：trace.md / trace.json / plan.json / model_calls.json
+  README.md          每个运行记录的清单与对应验收点
+  test-report.txt    pytest 完整输出（25 passed）
+  runs/              13 组实际输出：9 组离线 + 4 组真实模型
 data/
   materials.json     合成素材、工具费用表、3 个候选方案
 docs/
