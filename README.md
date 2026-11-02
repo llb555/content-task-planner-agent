@@ -17,6 +17,8 @@
 
 ## 评审入口（3 分钟）
 
+> 想先看"为什么这么做"，直接读 [SUBMISSION.md](SUBMISSION.md)（提交说明与思路）。
+
 ```bash
 # 1. 跑测试（25 项，覆盖题目全部验收点 + 续跑 + 模型适配器）
 pip install -r requirements.txt
@@ -176,6 +178,7 @@ docs/
 
 | 文件 | 内容 |
 |---|---|
+| [SUBMISSION.md](SUBMISSION.md) | **提交说明与思路**（可直接作为答题框正文） |
 | [docs/01-requirements.md](docs/01-requirements.md) | 用户、目标、范围、成功标准、验收点对照 |
 | [docs/02-solution.md](docs/02-solution.md) | 调用流程、动态决策、技术取舍 |
 | [docs/03-evaluation.md](docs/03-evaluation.md) | 测试预期、实际结果、失败与限制 |
