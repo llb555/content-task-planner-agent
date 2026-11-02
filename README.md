@@ -7,8 +7,11 @@
 模型绕不过去。
 
 > **题目**：项目题 2 · 内容任务规划 Agent（100 分）
+> **仓库**：https://github.com/llb555/content-task-planner-agent
 > **运行方式**：CLI（`python -m content_planner`）
 > **依赖**：Python 3.10+，运行时零第三方依赖，测试只需 pytest
+>
+> 提交的最终 commit SHA 见提交说明（README 自身无法记录包含它的那次 commit 的 SHA）。
 
 ---
 
